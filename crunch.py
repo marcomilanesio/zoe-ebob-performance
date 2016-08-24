@@ -3,7 +3,7 @@ import os
 import re
 import csv
 
-cols = ['scload', 'read', 'filter', 'filled', 'training', 'model', 'runtime']
+cols = ['run', 'scload', 'read', 'filter', 'filled', 'training', 'model', 'runtime']
 dir = './logs'
 
 sparkload_time = []
