@@ -42,12 +42,15 @@ class Test:
         return self.exec_api.get(exec_id)['status'] == 'running'
 
     def run_test(self):
+        ts = time.time()
         exec_id = self.start_exec()
         outfilename = './logs/{}'.format(exec_id)
         submit_id = self.get_submit_service(exec_id)
         while not self.is_running(exec_id):
             time.sleep(0.5)
+        te = time.time()
         with open(outfilename, 'w') as out:
+            out.write("PerfMeasure: Scheduling time: {}".format(te - ts))
             for line in self.service_api.get_logs(submit_id):
                 out.write("{}\n".format(line))
         self.exec_api.terminate(exec_id)
